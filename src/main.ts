@@ -1,26 +1,18 @@
-// import { createApp } from 'vue'
-// import ElementPlus from 'element-plus';
-// import router from "./router";
-// import 'element-plus/lib/theme-chalk/index.css';
-// import App from './App.vue';
-// import './index.css'
+import { createApp } from 'vue';
+import router from './router/index'
+import App from './App.vue';
+import ElementPlus from 'element-plus';
+// import 'element-plus/theme-chalk/index.css';
+import 'element-plus/dist/index.css'
+import * as echarts from 'echarts';
+import store, { key } from './store';
+import qs from 'qs';
+//  引入flexible插件
+import 'lib-flexible'
 
-// const app = createApp(App)
-// app.use(ElementPlus)
-// app.use(router)
-// app.mount('#app')
-// main.ts
-import { createApp } from 'vue'
-import Antd from 'ant-design-vue';
-import {createPinia} from "pinia"
-import router from "./router";
-import 'ant-design-vue/dist/antd.css';
-import App from './App.vue'
-import './index.css'
-
-const app = createApp(App)
-const pinia = createPinia()
-app.use(router);
-app.use(pinia);
-app.use(Antd);
+const app = createApp(App);
+app.config.globalProperties.$echarts = echarts;
+app.config.globalProperties.$qs = qs;
+app.use(router, store, key,)
+app.use(ElementPlus)
 app.mount('#app')

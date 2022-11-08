@@ -1,59 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3.0 + Vite" />
-  <!-- <a-button>11</a-button> -->
-    <!-- <a-button type="primary" @click="plus()">
-      {{number}}
-    </a-button> -->
-    <a-button type="primary" @click="plus()">
-      {{user.name}}
-    </a-button>
+  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
+  <!-- <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" /> -->
+  <!-- <Comp :title-info="{ value: '待办事项', color: 'red' }"></Comp> -->
+<!-- <h2>x:{{obj.x}},y:{{obj.y}}</h2>
+<url-page></url-page> -->
+<!-- <el-button type="pri">1111</el-button> -->
+<!-- <el-button type="primary" size="default">111</el-button> -->
+<router-view></router-view>
 </template>
 
-<script>
-import {defineComponent,reactive}from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
-
+<script lang="ts">
+import { defineComponent } from 'vue';
+// import HelloWorld from "./components/HelloWorld.vue";
+// import Comp from './components/CompStetup.vue';
+import useMousePosition  from './hooks/useMousePotision';
+import urlPage from './components/getUrlPage/urlPage.vue';
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    // Comp,
+    // HelloWorld,
+    urlPage
   },
-  // data(){
-  //// 普通方法 
-
-  //   return{
-  //     number:30
-  //   }
-  // },
-  // methods:{
-  //   plus(){
-  //     this.number++
-  //   }
-  // }
-  setup(){
-    // ref是对于基本类型做响应式
-    //  steup方法
-    // const number = ref(30)
-    // const plus = ()=>{
-    //   number.value++
-    //   console.log(111)
-    // }
-    // return {
-    //   number,
-    //   plus
-    // }
-    // reactive是对象的
-    const user = reactive({
-      name:'呼呼呼'
-    });
-    const plus = ()=>{
-        user.name+='111'    
-    }
-    return{
-      user,
-      plus
+  setup() {
+    const obj = useMousePosition()
+    return {
+      obj
     }
   }
-})
+});
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
