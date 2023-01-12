@@ -1,7 +1,7 @@
 <!--  -->
 <template>
 <div class='getUrl'>
-    <img :src='imgObj.imgCon' style="width:200px; height:200px">
+    <img alt="图片" :src='imgObj.imgCon' style="width:200px; height:200px">
 </div>
 </template>
 

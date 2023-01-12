@@ -12,7 +12,7 @@
     "lib-flexible": "^0.3.2",
     "qs": "^6.11.0",
     "vue": "^3.0.5",
-    "vue-router": "4"
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",

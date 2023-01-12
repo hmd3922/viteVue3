@@ -7,7 +7,7 @@ export default defineConfig({
     host:'0.0.0.0',
     open: true, // 在服务器启动时自动在浏览器中打开应用程序
     cors: true, // 默认启用并允许任何源
-    port: 8085,
+    port: 8087,
     strictPort: true, // 严格端口 true:如果端口已被使用，则直接退出，而不会再进行后续端口的尝试。
     /**
      * @description 解决chrome设置origin:*也跨域机制,代理/api前缀到服务基地址
