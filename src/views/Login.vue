@@ -53,7 +53,7 @@ import { userInfo } from 'os'
 interface ApiResponse {
   code: number
   message: string
-  data?: any
+  token: string
 }
 
 const router = useRouter()
@@ -70,25 +70,33 @@ const rules = loginRules
 const handleSubmit = async () => {
   if (!formRef.value) return
   
-  await formRef.value.validate(async (valid) => {
-    if (valid) {
-      try {
-          if(!isLogin.value){
-            const registerRes = await register({username:form.username,password:form.password}) as ApiResponse
-              if(registerRes.code === 200){
-                ElMessage.success('注册成功')
-                isLogin.value = true
-              }else{
-                ElMessage.error(registerRes.message)
-              }
-             
-          }
-
-      } catch (error) {
-        ElMessage.error('请求失败')
-      }
+  const valid = await formRef.value.validate().catch(() => false)
+  if (!valid) return
+  
+  try {
+    const apiFunc = isLogin.value ? login : register
+    const res = await apiFunc({username: form.username, password: form.password}) as ApiResponse
+    console.log(res)
+    if (res.code !== 200) {
+      ElMessage.error(res.message || (isLogin.value ? '登录失败' : '注册失败'))
+      return
     }
-  })
+    
+    if (isLogin.value) {
+      ElMessage.success('登录成功')
+       console.log(res)
+      if (res&& res.token) {
+        localStorage.setItem('token', res.token)
+        router.push('/').catch(err => console.error('导航错误:', err))
+      }
+    } else {
+      ElMessage.success('注册成功')
+      isLogin.value = true
+    }
+  } catch (error) {
+    console.error('请求错误:', error)
+    ElMessage.error('请求失败')
+  }
 }
 
 const toggleMode = () => {
